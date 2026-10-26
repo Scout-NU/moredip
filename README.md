@@ -20,6 +20,17 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Waitlist subscriptions
+
+The `/waitlist` form saves email subscriptions to Shopify through `/api/subscribe`.
+
+1. Copy `.env.example` to `.env.local` and fill in `SHOPIFY_STORE_DOMAIN` and
+   `SHOPIFY_ADMIN_ACCESS_TOKEN` (requires `read_customers` and `write_customers` permissions).
+2. Restart the dev server, submit the form at `/waitlist`, and check Shopify **Customers**.
+
+Credentials stay server-side. This uses single opt-in; confirmation emails and
+marketing notifications are not configured.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
