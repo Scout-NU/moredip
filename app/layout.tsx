@@ -1,5 +1,7 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Footer from "./components/footer";
 import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -60,7 +62,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 ))}
               </div>
 
-              <div className="annoouncement-group" aria-hidden="true">
+              <div className="announcement-group" aria-hidden="true">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <span key={i}>7G OF PROTEIN PER SERVING.</span>
                 ))}
@@ -68,8 +70,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </div>
           </div>
         </header>
-        
+
         {children}
+
+        <Footer />
       </body>
     </html>
   );
