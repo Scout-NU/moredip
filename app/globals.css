@@ -18,6 +18,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-barlow-condensed), sans-serif;
+  width: 101%;
+  margin: 0;
+  padding: 0;
 }
 
 /* Header */
