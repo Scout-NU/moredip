@@ -1,9 +1,14 @@
+
 @import "tailwindcss";
+
+/* ========================================
+   1. GLOBAL VARIABLES
+======================================== */
 
 :root {
   --background: #ffffff;
-  --foreground: #D62050;
-  --header-background: #FFD208;
+  --foreground: #d62050;
+  --header-background: #ffd208;
   --border-color: #eeeeee;
   --accent: #d985a2;
 }
@@ -14,65 +19,76 @@
   --font: var(--font-barlow-condensed), Arial, sans-serif;
 }
 
+/* ========================================
+   2. GLOBAL LAYOUT
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-width: 0;
+}
+
 body {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-barlow-condensed), sans-serif;
-  width: 101%;
-  margin: 0;
-  padding: 0;
 }
 
-/* Header */
+img {
+  max-width: 100%;
+}
+
+/* ========================================
+   3. HEADER
+======================================== */
+
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
 
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
 
   width: 100%;
-  background: #FFD208;
-}
-
-/* Left navigation */
-.nav-left {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 32px;
-  padding-left: 32px;
   min-width: 0;
+
+  background: var(--header-background);
 }
 
-/* Center logo */
-.site-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  height: 100px;
-}
+/* Navigation */
 
-.logo-image {
-  display: block;
-  width: 200px;
-  height: auto;
-}
-
-/* Right navigation */
+.nav-left,
 .nav-right {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 32px;
-  padding-right: 32px;
   min-width: 0;
 }
 
-/* All navigation links */
+.nav-left {
+  justify-content: flex-start;
+  padding-left: 32px;
+}
+
+.nav-right {
+  justify-content: flex-end;
+  padding-right: 32px;
+}
+
 .nav-left a,
 .nav-right a {
   color: var(--foreground);
@@ -82,6 +98,7 @@ body {
   letter-spacing: 0.5px;
   text-decoration: none;
   white-space: nowrap;
+
   transition: opacity 0.2s ease;
 }
 
@@ -90,34 +107,145 @@ body {
   opacity: 0.6;
 }
 
+/* Logo */
+
+.site-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100px;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.logo-image {
+  display: block;
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ========================================
+   4. HEADER ANNOUNCEMENT BAR
+======================================== */
+
 .announcement-bar {
   grid-column: 1 / -1;
-  width: calc(100% + 8vw);
-  margin-left: -4vw;
+
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+
   margin-top: 6px;
   margin-bottom: -6px;
-  box-sizing: border-box;
-  overflow: hidden;
-  background: #E91E63;
-  color: #FFD208;
+
+  background: #e91e63;
+  color: #ffd208;
   white-space: nowrap;
 }
+
+/* Shared scrolling text */
 
 .announcement-track {
   display: flex;
   width: max-content;
+
   animation: ticker-scroll 60s linear infinite;
+}
+
+.announcement-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .announcement-group span {
   display: inline-block;
   flex-shrink: 0;
+
   padding: 8px 12px;
+
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 18px;
   font-weight: 800;
   letter-spacing: 0.5px;
 }
+
+/* ========================================
+   5. HOMEPAGE TEXT CONVEYORS
+======================================== */
+
+.home-announcement-bar {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Colors are set in page.tsx */
+
+/* ========================================
+   6. INFINITE DIP CONVEYOR
+======================================== */
+
+.home-products-viewport {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+
+  /* Increased vertical spacing */
+  padding: 80px 0;
+
+  background: #17a6de;
+}
+
+.home-products-track {
+  display: flex;
+  width: max-content;
+  max-width: none;
+
+  /* Slower continuous scrolling */
+  animation: home-products-scroll 90s linear infinite;
+  animation-play-state: running;
+
+  will-change: transform;
+}
+
+.home-products-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+
+  gap: 36px;
+  padding-right: 36px;
+}
+
+/* Never pause when hovering */
+
+.home-products-track:hover,
+.home-products-viewport:hover .home-products-track {
+  animation-play-state: running;
+}
+
+/* ========================================
+   7. FOOTER
+======================================== */
+
+footer {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* ========================================
+   8. ANIMATIONS
+======================================== */
+
+/* Header and homepage text conveyors */
 
 @keyframes ticker-scroll {
   from {
@@ -126,5 +254,110 @@ body {
 
   to {
     transform: translateX(-50%);
+  }
+}
+
+/* Infinite dip conveyor */
+
+@keyframes home-products-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ========================================
+   9. TABLET RESPONSIVENESS
+======================================== */
+
+@media (max-width: 1024px) {
+  .nav-left,
+  .nav-right {
+    gap: 16px;
+  }
+
+  .nav-left {
+    padding-left: 20px;
+  }
+
+  .nav-right {
+    padding-right: 20px;
+  }
+
+  .nav-left a,
+  .nav-right a {
+    font-size: 18px;
+  }
+
+  .logo-image {
+    width: 160px;
+  }
+}
+
+/* ========================================
+   10. MOBILE RESPONSIVENESS
+======================================== */
+
+@media (max-width: 640px) {
+  /* Header */
+
+  .site-logo {
+    height: 75px;
+  }
+
+  .logo-image {
+    width: 110px;
+  }
+
+  .nav-left,
+  .nav-right {
+    gap: 8px;
+  }
+
+  .nav-left {
+    padding-left: 10px;
+  }
+
+  .nav-right {
+    padding-right: 10px;
+  }
+
+  .nav-left a,
+  .nav-right a {
+    font-size: 12px;
+    letter-spacing: 0;
+    white-space: normal;
+  }
+
+  /* Text conveyors */
+
+  .announcement-group span {
+    font-size: 15px;
+    padding: 7px 10px;
+  }
+
+  /* Dip conveyor */
+
+  .home-products-viewport {
+    padding: 55px 0;
+  }
+
+  .home-products-group {
+    gap: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* ========================================
+   11. ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-track,
+  .home-products-track {
+    animation: none;
   }
 }
