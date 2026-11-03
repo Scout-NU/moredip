@@ -24,16 +24,16 @@ const secondaryLinks = [
 
 export default function Footer() {
   return (
-    <footer className="w-full min-w-0 bg-[#17a6de] px-6 py-12 text-black sm:px-10 lg:min-h-[611px] lg:px-[6.25%] lg:py-[108px]">
-      <div className="mx-auto grid w-full min-w-0 max-w-[1512px] grid-cols-1 gap-14 lg:grid-cols-[minmax(0,604px)_minmax(0,1fr)] lg:gap-[7.85%]">
+    <footer className="w-full min-w-0 bg-[#17a6de] px-6 py-12 text-black sm:px-10 lg:min-h-[500px] lg:px-[6.25%] lg:py-[108px]">
+      <div className="mx-auto grid w-full min-w-0 max-w-[1512px] grid-cols-1 gap-14 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-[155px]">
 
         {/* Left column */}
         <div className="min-w-0">
-          <h2 className="text-[32px] font-bold leading-tight lg:text-[41px] lg:leading-[1.2]">
+          <h2 className="text-[55px] font-bold leading-tight lg:text-[55px] lg:leading-[1.2]">
             Looking for More?
           </h2>
 
-          <div className="mt-9 grid grid-cols-2 gap-4 sm:gap-8 lg:mt-[59px] lg:max-w-[480px]">
+          <div className="mt-9 grid grid-cols-2 gap-x-8 sm:gap-x-16 lg:mt-[59px] lg:max-w-[560px] lg:gap-x-24">
 
             {/* Primary links */}
             <nav aria-label="Primary footer navigation">
@@ -42,7 +42,7 @@ export default function Footer() {
                   <li key={label}>
                     <a
                       href={primaryHrefs[index]}
-                      className="text-[20px] font-normal leading-[1.45] hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 sm:text-[25px]"
+                      className="text-[20px] font-normal leading-[1.45] hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 sm:text-[30px]"
                     >
                       {label}
                     </a>
@@ -58,7 +58,7 @@ export default function Footer() {
                   <li key={label}>
                     <a
                       href="#"
-                      className="text-[20px] font-normal leading-[1.45] hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 sm:text-[25px]"
+                      className="text-[20px] font-normal leading-[1.45] hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 sm:text-[30px]"
                     >
                       {label}
                     </a>
@@ -79,23 +79,23 @@ export default function Footer() {
           >
             <label
               htmlFor="footer-email"
-              className="mb-[18px] block text-[13px] font-normal uppercase leading-none"
+              className="mb-[18px] block text-[20px] font-normal uppercase leading-none"
             >
               Sign up for exclusive deals &amp; releases
             </label>
 
-            <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:gap-4 lg:flex-col xl:flex-row">
+            <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:gap-4">
               <input
                 id="footer-email"
                 name="email"
                 type="email"
                 placeholder="Email"
-                className="h-[83px] w-full min-w-0 flex-1 bg-[#d9d9d9] px-4 text-[24px] font-normal text-black placeholder:text-[#7d7d7d] focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="h-[50px] w-full min-w-0 flex-1 bg-[#fff2df] px-4 text-[30px] font-normal text-black placeholder:text-[#7d7d7d] focus-visible:outline-2 focus-visible:outline-offset-2 sm:flex-1"
               />
 
               <button
                 type="submit"
-                className="h-[83px] w-full shrink-0 bg-[#ffd208] px-8 text-[18px] font-normal transition-[filter] hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 sm:w-[206px] lg:w-full xl:w-[206px]"
+                className="h-[50px] w-fit shrink-0 self-start bg-[#ffd208] px-8 text-[30px] font-normal whitespace-nowrap transition-[filter] hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 Subscribe
               </button>
@@ -103,7 +103,7 @@ export default function Footer() {
           </form>
 
           {/* Social heading */}
-          <p className="mt-[38px] text-[14px] font-normal uppercase leading-none">
+          <p className="mt-[38px] text-[20px] font-normal uppercase leading-none">
             Follow us on socials @eatmoredip
           </p>
 
@@ -122,7 +122,7 @@ export default function Footer() {
                 key={network}
                 href="#"
                 aria-label={network}
-                className="aspect-[179/177.259] min-w-0 bg-[#c2c2c2] focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="aspect-[179/177.259] min-w-0 bg-[#FFF2DF] focus-visible:outline-2 focus-visible:outline-offset-2"
               />
             ))}
           </div>
