@@ -1,3 +1,5 @@
+import { getShopifyAccessToken } from "@/lib/shopify-auth";
+
 const success = () => Response.json({ message: "You're on the list! Watch your inbox for deals and releases." });
 
 type Customer = { id: string; email: string | null; emailMarketingConsent: { marketingState: string } | null };
@@ -25,17 +27,17 @@ export async function POST(request: Request) {
   }
   if ("website" in body && body.website) return success();
 
-  const token = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
   const domain = process.env.SHOPIFY_STORE_DOMAIN?.trim();
-  if (!token || !domain || !/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/.test(domain)) {
+  if (!domain || domain === "your-store.myshopify.com" || !/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/.test(domain)) {
     return Response.json({ message: "Subscriptions are temporarily unavailable. Please try again later." }, { status: 503 });
   }
   try {
+    const token = await getShopifyAccessToken(domain);
     const signal = AbortSignal.timeout(10000);
     async function graphql<T>(query: string, variables: Record<string, unknown>): Promise<T> {
       const response = await fetch(`https://${domain}/admin/api/2026-04/graphql.json`, {
         method: "POST",
-        headers: { "X-Shopify-Access-Token": token!, "Content-Type": "application/json" },
+        headers: { "X-Shopify-Access-Token": token, "Content-Type": "application/json" },
         body: JSON.stringify({ query, variables }),
         cache: "no-store",
         signal,
