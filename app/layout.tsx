@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Barlow_Condensed } from "next/font/google";
+import { Geist, Geist_Mono, Barlow_Condensed, League_Gothic } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import Footer from "./components/footer";
@@ -23,6 +23,11 @@ const barlowCondensed = Barlow_Condensed({
   style: ["normal", "italic"],
 });
 
+const leagueGothic = League_Gothic({
+  variable: "--font-league-gothic",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "MoreDip",
   description: "MoreDip",
@@ -36,7 +41,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${barlowCondensed.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${barlowCondensed.variable} ${leagueGothic.variable} h-full antialiased`}
     >
       <body className="flex min-h-screen w-full min-w-0 flex-col overflow-x-clip">
         <header className="site-header">
@@ -60,7 +65,7 @@ export default function RootLayout({
 
           {/* Right navigation */}
           <nav className="nav-right" aria-label="Right navigation">
-            <Link href="/#about">About</Link>
+            <Link href="/about">About</Link>
             <Link href="/#cart">Cart</Link>
           </nav>
 

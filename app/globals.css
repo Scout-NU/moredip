@@ -17,6 +17,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font: var(--font-barlow-condensed), Arial, sans-serif;
+  --font-league: var(--font-league-gothic), Impact, sans-serif;
 }
 
 /* ========================================
