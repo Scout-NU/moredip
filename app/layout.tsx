@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Barlow_Condensed, League_Gothic } from "next/font/go
 import Link from "next/link";
 import Image from "next/image";
 import Footer from "./components/footer";
+import ConveyorTrack from "./components/conveyor-track";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -71,7 +72,7 @@ export default function RootLayout({
 
           {/* Announcement bar */}
           <div className="announcement-bar">
-            <div className="announcement-track">
+            <ConveyorTrack className="announcement-track">
               {[0, 1].map((group) => (
                 <div
                   className="announcement-group"
@@ -85,7 +86,7 @@ export default function RootLayout({
                   ))}
                 </div>
               ))}
-            </div>
+            </ConveyorTrack>
           </div>
         </header>
 
