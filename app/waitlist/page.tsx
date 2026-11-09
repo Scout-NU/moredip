@@ -4,13 +4,14 @@ export const metadata = { title: "Join the waitlist | MoreDip" };
 
 export default function WaitlistPage() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#1ca5d2] px-6 py-20 text-black">
-      <section className="w-full max-w-[1018px]" aria-labelledby="waitlist-heading">
-        <h1 id="waitlist-heading" className="mb-6 text-xl font-normal uppercase sm:text-[28px]">
-          Sign up for exclusive deals &amp; releases
-        </h1>
-        <SubscribeForm />
-      </section>
-    </main>
+    <section className="grid grid-cols-1 bg-[#fff4de] pb-10 md:min-h-[650px] md:grid-cols-[51%_49%]" aria-labelledby="waitlist-heading">
+      <div className="-mb-10 h-[360px] bg-[#d9d9d9] md:h-auto" aria-hidden="true" />
+      <div className="flex items-center justify-center px-6 py-10 md:px-10 md:py-[46px]">
+        <div className="relative top-4 w-full min-w-0 max-w-[504px]">
+          <h1 id="waitlist-heading" className="font-league mb-[30px] text-center text-[64px] leading-[1.05] md:mb-[45px] md:text-[clamp(59px,6.3vw,86px)]">Join the Dip Club!</h1>
+          <SubscribeForm />
+        </div>
+      </div>
+    </section>
   );
 }
