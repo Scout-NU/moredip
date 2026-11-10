@@ -29,7 +29,7 @@ export default function Home() {
       {/* Hero */}
       <section className="hero" id="about">
         <Image
-          src="/images/peopleanddip.png"
+          src="/images/friendswithdip.png"
           alt="Friends enjoying MoreDip"
           fill
           priority

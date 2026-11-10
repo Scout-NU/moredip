@@ -24,7 +24,7 @@ const reviews: Review[] = [
   },
   {
     type: "photo",
-    image: "/images/peopleanddip.png",
+    image: "/images/friendswithdip.png",
     alt: "Friends enjoying MoreDip",
   },
   {
