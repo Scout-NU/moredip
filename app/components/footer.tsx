@@ -10,8 +10,8 @@ const primaryLinks = [
 
 const primaryHrefs = [
   "/#products",
-  "/#waitlist",
-  "/#about",
+  "/waitlist",
+  "/about",
   "/#cart",
 ];
 

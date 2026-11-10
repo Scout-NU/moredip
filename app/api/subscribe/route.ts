@@ -1,6 +1,8 @@
+import { getShopifyAccessToken } from "@/lib/shopify-auth";
+
 const success = () => Response.json({ message: "You're on the list! Watch your inbox for deals and releases." });
 
-type Customer = { id: string; email: string | null; emailMarketingConsent: { marketingState: string } | null };
+type Customer = { note: string | null; id: string; email: string | null; emailMarketingConsent: { marketingState: string } | null };
 type MutationResult = { customer: { id: string } | null; userErrors: { message: string }[] };
 
 export async function POST(request: Request) {
@@ -25,17 +27,34 @@ export async function POST(request: Request) {
   }
   if ("website" in body && body.website) return success();
 
-  const token = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
+  const fields = body as Record<string, unknown>;
+  for (const [key, limit] of [["fullName", 100], ["product", 80], ["referral", 500]] as const) {
+    if (fields[key] != null && (typeof fields[key] !== "string" || (fields[key] as string).length > limit)) {
+      return Response.json({ message: "Please check your form details." }, { status: 400 });
+    }
+  }
+  const fullName = (fields.fullName as string | undefined)?.trim();
+  const product = (fields.product as string | undefined)?.trim();
+  const referral = (fields.referral as string | undefined)?.trim();
+  if (fields.fullName != null && !fullName) {
+    return Response.json({ message: "Please enter your full name." }, { status: 400 });
+  }
+  if (product && !["Mexican Street Style Corn", "Spinach Artichoke", "Hummus"].includes(product)) {
+    return Response.json({ message: "Please select a product from the list." }, { status: 400 });
+  }
+  const details = [fullName && `Full name: ${fullName}`, product && `Product: ${product}`, referral && `How did you hear about us: ${referral}`].filter(Boolean).join("\n");
+
   const domain = process.env.SHOPIFY_STORE_DOMAIN?.trim();
-  if (!token || !domain || !/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/.test(domain)) {
+  if (!domain || domain === "your-store.myshopify.com" || !/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/.test(domain)) {
     return Response.json({ message: "Subscriptions are temporarily unavailable. Please try again later." }, { status: 503 });
   }
   try {
+    const token = await getShopifyAccessToken(domain);
     const signal = AbortSignal.timeout(10000);
     async function graphql<T>(query: string, variables: Record<string, unknown>): Promise<T> {
       const response = await fetch(`https://${domain}/admin/api/2026-04/graphql.json`, {
         method: "POST",
-        headers: { "X-Shopify-Access-Token": token!, "Content-Type": "application/json" },
+        headers: { "X-Shopify-Access-Token": token, "Content-Type": "application/json" },
         body: JSON.stringify({ query, variables }),
         cache: "no-store",
         signal,
@@ -50,7 +69,7 @@ export async function POST(request: Request) {
       const data = await graphql<{ customers: { nodes: Customer[] } }>(`
         query WaitlistCustomer($query: String!) {
           customers(first: 10, query: $query) {
-            nodes { id email emailMarketingConsent { marketingState } }
+            nodes { id email note emailMarketingConsent { marketingState } }
           }
         }`, { query: `email:${JSON.stringify(email)}` });
       return data.customers.nodes.find(customer => customer.email?.toLowerCase() === email);
@@ -64,11 +83,19 @@ export async function POST(request: Request) {
         }`, { input: {
           email,
           tags: ["waitlist"],
+          ...(details ? { note: details } : {}),
           emailMarketingConsent: { marketingState: "SUBSCRIBED", marketingOptInLevel: "SINGLE_OPT_IN" },
         } });
       if (!data.customerCreate.userErrors.length && data.customerCreate.customer) return success();
       customer = await findCustomer();
       if (!customer) throw new Error("Shopify customer creation failed");
+    }
+    if (details && !customer.note?.includes(details)) {
+      const saved = await graphql<{ customerUpdate: MutationResult }>(`
+        mutation WaitlistDetails($input: CustomerInput!) {
+          customerUpdate(input: $input) { customer { id } userErrors { message } }
+        }`, { input: { id: customer.id, note: [customer.note, details].filter(Boolean).join("\n\n") } });
+      if (saved.customerUpdate.userErrors.length || !saved.customerUpdate.customer) throw new Error("Shopify details update failed");
     }
     if (customer.emailMarketingConsent?.marketingState === "SUBSCRIBED") return success();
 

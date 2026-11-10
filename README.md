@@ -22,14 +22,8 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Waitlist subscriptions
 
-The `/waitlist` form saves email subscriptions to Shopify through `/api/subscribe`.
-
-1. Copy `.env.example` to `.env.local` and fill in `SHOPIFY_STORE_DOMAIN` and
-   `SHOPIFY_ADMIN_ACCESS_TOKEN` (requires `read_customers` and `write_customers` permissions).
-2. Restart the dev server, submit the form at `/waitlist`, and check Shopify **Customers**.
-
-Credentials stay server-side. This uses single opt-in; confirmation emails and
-marketing notifications are not configured.
+Waitlist subscriptions are saved to Shopify. Copy `.env.example` to `.env.local`,
+fill in the Shopify credentials, and restart the dev server.
 
 ## Learn More
 
