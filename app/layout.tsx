@@ -42,7 +42,7 @@ export default function RootLayout({
         <header className="site-header">
           {/* Left navigation */}
           <nav className="nav-left" aria-label="Left navigation">
-            <Link href="/#products">Products</Link>
+            <Link href="/products">Products</Link>
             <Link href="/#waitlist">Join the Waitlist</Link>
           </nav>
 
