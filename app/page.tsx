@@ -112,44 +112,6 @@ function ProductCard({
 }
 
 /* ========================================
-   SCROLLING TEXT BANNER
-======================================== */
-
-function ConveyorBanner({
-  text,
-  background,
-  color,
-}: {
-  text: string;
-  background: string;
-  color: string;
-}) {
-  return (
-    <div
-      className="home-announcement-bar"
-      style={{
-        backgroundColor: background,
-        color,
-      }}
-    >
-      <ConveyorTrack className="announcement-track">
-        {[0, 1].map((group) => (
-          <div
-            key={group}
-            className="announcement-group"
-            aria-hidden={group === 1}
-          >
-            {Array.from({ length: 12 }).map((_, i) => (
-              <span key={i}>{text}</span>
-            ))}
-          </div>
-        ))}
-      </ConveyorTrack>
-    </div>
-  );
-}
-
-/* ========================================
    INFINITE DIP CONVEYOR
 ======================================== */
 
@@ -228,19 +190,7 @@ export default function Home() {
         id="products"
         className="w-full overflow-hidden bg-[#17a6de]"
       >
-        <ConveyorBanner
-          text="CONVEYOR TEXT TBD."
-          background="#FFD208"
-          color="#17A6DE"
-        />
-
         <ProductConveyor />
-
-        <ConveyorBanner
-          text="CONVEYOR TEXT TBD."
-          background="#D62050"
-          color="#FFD208"
-        />
       </section>
 
       {/* SECTION 3: DIP CLOSEUP CAROUSEL */}

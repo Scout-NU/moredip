@@ -49,7 +49,7 @@ export default function RootLayout({
           {/* Left navigation */}
           <nav className="nav-left" aria-label="Left navigation">
             <Link href="/products">Products</Link>
-            <Link href="/#waitlist">Join the Waitlist</Link>
+            <Link href="/waitlist">Join the Waitlist</Link>
           </nav>
 
           {/* Center logo */}

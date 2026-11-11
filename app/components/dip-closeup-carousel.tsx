@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 /* ========================================
    TYPES
@@ -56,6 +56,9 @@ const TEXT_MAX_WIDTH = 260;
   controls when fitting the canvas to the screen height.
 */
 const RESERVED_SCREEN_HEIGHT = "300px";
+
+/* How long each dip stays on screen before the carousel moves on */
+const AUTOPLAY_INTERVAL_MS = 5000;
 
 /* Angles in degrees: 0 is right, 90 is down, 180 is left */
 const calloutAngles = [215, 180, 145, -25, 25];
@@ -246,12 +249,15 @@ function ArrowButton({
 function CarouselControls({
   dips,
   index,
+  announce,
   onPrevious,
   onNext,
   onSelect,
 }: {
   dips: CloseupDip[];
   index: number;
+  /* Screen readers announce dip changes only while autoplay is paused */
+  announce: boolean;
   onPrevious: () => void;
   onNext: () => void;
   onSelect: (index: number) => void;
@@ -270,7 +276,7 @@ function CarouselControls({
         <p
           className="min-w-[200px] text-center text-[20px] font-bold uppercase leading-tight sm:text-[24px]"
           style={{ color: dip.textColor }}
-          aria-live="polite"
+          aria-live={announce ? "polite" : "off"}
         >
           {dip.name}
         </p>
@@ -317,7 +323,35 @@ export default function DipCloseupCarousel({
   dips: CloseupDip[];
 }) {
   const [index, setIndex] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const dip = dips[index];
+
+  /* Respect the visitor's reduced motion setting */
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+
+  /*
+    Autoplay. The timer restarts whenever the dip changes, so a manual
+    click always gets the full interval before the next automatic move.
+    It pauses while the visitor hovers over or tabs into the section.
+  */
+  const paused = hovered || focused || reducedMotion;
+
+  useEffect(() => {
+    if (paused) return;
+    const timer = window.setTimeout(
+      () => setIndex((i) => (i + 1) % dips.length),
+      AUTOPLAY_INTERVAL_MS
+    );
+    return () => window.clearTimeout(timer);
+  }, [index, paused, dips.length]);
 
   const previous = () => setIndex((i) => (i - 1 + dips.length) % dips.length);
   const next = () => setIndex((i) => (i + 1) % dips.length);
@@ -326,6 +360,7 @@ export default function DipCloseupCarousel({
     <CarouselControls
       dips={dips}
       index={index}
+      announce={paused}
       onPrevious={previous}
       onNext={next}
       onSelect={setIndex}
@@ -339,6 +374,14 @@ export default function DipCloseupCarousel({
       style={{ backgroundColor: dip.background }}
       aria-roledescription="carousel"
       aria-label="Dip close ups"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setFocused(false);
+        }
+      }}
     >
       {/* Desktop layout */}
 

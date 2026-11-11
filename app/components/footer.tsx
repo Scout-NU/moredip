@@ -17,7 +17,7 @@ const primaryHrefs = [
 
 const secondaryLinks = [
   "Wholesale",
-  "Link 6",
+  "Find My",
   "Link 7",
   "Link 8",
 ];
