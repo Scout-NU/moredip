@@ -9,7 +9,7 @@ const primaryLinks = [
 ];
 
 const primaryHrefs = [
-  "/#products",
+  "/products",
   "/waitlist",
   "/about",
   "/#cart",
