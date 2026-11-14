@@ -6,19 +6,19 @@ const products = [
   {
     name: "Spinach Artichoke",
     price: "$11.99",
-    image: "/images/spinachartichoke.png",
+    image: "/images/tub-spinach-artichoke.png",
     description: "Blurb about product",
   },
   {
     name: "Garlic-Roasted Hummus",
     price: "$11.99",
-    image: "/images/hummus.png",
+    image: "/images/tub-hummus.png",
     description: "Blurb about product",
   },
   {
     name: "Mexican Street Corn",
     price: "$11.99",
-    image: "/images/mexicanstreetcorn.png",
+    image: "/images/tub-mexican-corn.png",
     description: "Blurb about product",
   },
 ];
@@ -29,7 +29,7 @@ export default function Home() {
       {/* Hero */}
       <section className="hero" id="about">
         <Image
-          src="/images/friendswithdip.png"
+          src="/images/grid6.png"
           alt="Friends enjoying MoreDip"
           fill
           priority

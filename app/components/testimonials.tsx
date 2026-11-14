@@ -24,7 +24,7 @@ const reviews: Review[] = [
   },
   {
     type: "photo",
-    image: "/images/friendswithdip.png",
+    image: "/images/grid6.png",
     alt: "Friends enjoying MoreDip",
   },
   {
@@ -34,7 +34,7 @@ const reviews: Review[] = [
   },
   {
     type: "photo",
-    image: "/images/grillanddip.png",
+    image: "/images/grid3.png",
     alt: "MoreDip at a party",
   },
   {
@@ -44,7 +44,7 @@ const reviews: Review[] = [
   },
   {
   type: "photo",
-  image: "/images/samplesofdip.png",
+  image: "/images/grid1.png",
   alt: "A selection of MoreDip samples",
   },
 ];
