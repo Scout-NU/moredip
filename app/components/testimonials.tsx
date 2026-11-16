@@ -108,7 +108,7 @@ export default function Testimonials() {
     const distanceFromCenter = pointerPosition - 0.5;
 
     // Adjust 1 to change maximum speed
-    speed.current = distanceFromCenter * 1;
+    speed.current = distanceFromCenter * 3;
   };
 
   const handlePointerLeave = () => {
