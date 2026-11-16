@@ -154,34 +154,26 @@ export default function Home() {
       {/* SECTION 1: HERO */}
 
       <section
-        id="home"
-        className="grid min-h-[540px] w-full grid-cols-1 bg-[#d9d9d9] md:min-h-[640px] md:grid-cols-2"
-      >
-        <div
-          className="flex min-h-[320px] items-center justify-center bg-cover bg-center text-black md:min-h-[640px]"
+          id="home"
+          className="flex min-h-[540px] w-full items-center justify-center bg-[#d9d9d9] bg-cover bg-center md:min-h-[640px]"
           style={{
-            backgroundImage: "url('/images/hero.jpg')",
+            backgroundImage: "url('/images/homehero.png')",
           }}
         >
-          <span className="text-2xl">
-            Hero Image
-          </span>
-        </div>
-
-        <div className="flex flex-col items-start justify-center px-8 py-12 sm:px-12 lg:px-16">
-          <h1 className="max-w-[550px] text-[40px] font-bold leading-[1.05] text-[#d62050] sm:text-[54px] lg:text-[70px]">
-            Text over Hero Image:
+          <div className="flex flex-col items-center justify-center px-8 py-12 text-center sm:px-12 lg:px-16">
+          <h1 className="font-league text-center text-[128px] font-normal leading-[1.05] text-[#d62050] sm:text-[54px] lg:text-[90px]">
+          Text over Hero Image:
             <br />
             Specific Content TBD
-          </h1>
-
-          <a
+        </h1>
+        <a
             href="#products"
-            className="mt-8 inline-flex items-center justify-center rounded-lg bg-[#00a8df] px-8 py-4 text-[22px] font-bold uppercase text-[#ffda00] transition-all duration-200 hover:scale-105 hover:brightness-95"
+            className="mt-8 inline-flex items-center justify-center bg-[#00a8df] px-8 py-4 text-[40px] font-bold uppercase text-[#ffda00] transition-all duration-200 hover:scale-105 hover:brightness-95"
           >
             YES PLEASE
           </a>
-        </div>
+          </div>
+
       </section>
 
       {/* SECTION 2: PRODUCTS */}

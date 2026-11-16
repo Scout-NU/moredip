@@ -6,7 +6,7 @@ export default function Home() {
           id="aboutPage"
           className="flex min-h-[350x] w-full items-center justify-center bg-[#d9d9d9] bg-cover bg-center px-8 py-12 sm:px-12 md:min-h-[400px] lg:px-16"
           style={{
-            backgroundImage: "url('/images/aboutHero.jpg')",
+            backgroundImage: "url('/images/abouthero.png')",
           }}
         >
           <h1 className="font-league text-center text-[128px] font-normal leading-[1.05] text-[#d62050] sm:text-[54px] lg:text-[90px]">
@@ -23,7 +23,7 @@ export default function Home() {
     <div
       className="aspect-square w-[min(70vw,360px)] overflow-hidden rounded-full bg-[#d9d9d9] bg-cover bg-center"
       style={{
-        backgroundImage: "url('/images/dip-closeup.jpg')",
+        backgroundImage: "url('/images/tub-mexican-corn.png')",
       }}
     />
   </div>
