@@ -1,27 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Testimonials from "../components/testimonials";
-
-const products = [
-  {
-    name: "Spinach Artichoke",
-    price: "$11.99",
-    image: "/images/spinachartichoke.png",
-    description: "Blurb about product",
-  },
-  {
-    name: "Garlic-Roasted Hummus",
-    price: "$11.99",
-    image: "/images/hummus.png",
-    description: "Blurb about product",
-  },
-  {
-    name: "Mexican Street Corn",
-    price: "$11.99",
-    image: "/images/mexicanstreetcorn.png",
-    description: "Blurb about product",
-  },
-];
+import { products } from "../products/products";
 
 export default function Home() {
   return (
@@ -29,7 +9,7 @@ export default function Home() {
       {/* Hero */}
       <section className="hero" id="about">
         <Image
-          src="/images/friendswithdip.png"
+          src="/images/grid6.png"
           alt="Friends enjoying MoreDip"
           fill
           priority
@@ -50,11 +30,7 @@ export default function Home() {
       <section className="products-section" id="products">
         <div className="product-grid">
           {products.map((product) => (
-            <Link
-              href="#products"
-              className="product-card"
-              key={product.name}
-            >
+            <Link href={`/products/${product.slug}`} className="product-card" key={product.slug}>
               <div className="product-image-wrap">
                 <Image
                   src={product.image}
