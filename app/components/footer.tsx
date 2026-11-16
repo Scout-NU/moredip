@@ -1,6 +1,9 @@
 
 "use client";
 
+import Image from "next/image";
+import { gallery } from "../data/gallery";
+
 const primaryLinks = [
   "Products",
   "Waitlist",
@@ -117,14 +120,28 @@ export default function Footer() {
               "TikTok",
               "Facebook",
               "YouTube",
-            ].map((network) => (
-              <a
-                key={network}
-                href="#"
-                aria-label={network}
-                className="aspect-[179/177.259] min-w-0 bg-[#FFF2DF] focus-visible:outline-2 focus-visible:outline-offset-2"
-              />
-            ))}
+            ].map((network, index) => {
+              /* First four photos from the homepage social grid */
+              const photo = gallery[index];
+
+              return (
+                <a
+                  key={network}
+                  href="#"
+                  aria-label={network}
+                  className="relative aspect-[179/177.259] min-w-0 overflow-hidden border-2 border-white bg-[#FFF2DF] focus-visible:outline-2 focus-visible:outline-offset-2"
+                >
+                  <Image
+                    src={photo.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 640px) 200px, 50vw"
+                    className="object-cover"
+                    style={{ objectPosition: photo.focus }}
+                  />
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>
