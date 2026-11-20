@@ -1,3 +1,5 @@
+import TextConveyor from "../components/text-conveyor";
+
 export default function Home() {
     return (
       <div className="w-full min-w-0 overflow-x-clip">
@@ -39,12 +41,12 @@ export default function Home() {
       </div>
       </section>
 
-      {/* Divider stripe */}
-    <div className="flex w-full items-center justify-center bg-[#F94513] px-6 py-3">
-      <p className="text-center text-[18px] font-bold uppercase text-[#FFD208] sm:text-[22px]">
-        Conveyor text or solid stripe/divider to transition to footer
-      </p>
-    </div>
+      {/* Conveyor strip */}
+    <TextConveyor
+      text="BIG DIP ENERGY."
+      background="#F94513"
+      color="#FFD208"
+    />
 
     {/* Why MoreDip */}
 <section className="w-full bg-[#17A6DE] px-8 py-16 sm:px-12 lg:px-16 lg:py-24">
@@ -64,12 +66,12 @@ export default function Home() {
   </div>
 </section>
 
-    {/* Divider stripe */}
-    <div className="flex w-full items-center justify-center bg-[#FFD208] px-6 py-3">
-      <p className="text-center text-[18px] font-bold uppercase text-[#17A6DE] sm:text-[22px]">
-        Conveyor text or solid stripe/divider to transition to footer
-      </p>
-    </div>
+    {/* Conveyor strip */}
+    <TextConveyor
+      text="MORE TO DIP INTO."
+      background="#FFD208"
+      color="#17A6DE"
+    />
 
       </div>
     );

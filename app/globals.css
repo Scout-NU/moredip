@@ -33,6 +33,13 @@
 html {
   width: 100%;
   min-width: 0;
+
+  /*
+    Shows behind the page when the browser bounces past the top
+    (trackpad overscroll), so the area above the header stays yellow
+    instead of white. The body keeps its own white background.
+  */
+  background-color: var(--header-background);
 }
 
 body {

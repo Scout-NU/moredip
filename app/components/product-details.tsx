@@ -34,7 +34,6 @@ export default function ProductDetail({
   };
 
   const sections = [
-    { title: "The Macros", content: product.macros },
     { title: "Ingredients", content: product.ingredients },
     {
       title: "Nutritional Facts",

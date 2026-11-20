@@ -96,7 +96,7 @@ export default function Footer() {
           >
             <label
               htmlFor="footer-email"
-              className="mb-[18px] block text-[20px] font-normal uppercase leading-none"
+              className="mb-[18px] block text-[20px] font-bold uppercase leading-none"
             >
               Sign up for exclusive deals &amp; releases
             </label>
@@ -120,7 +120,7 @@ export default function Footer() {
           </form>
 
           {/* Social heading */}
-          <p className="mt-[38px] text-[20px] font-normal uppercase leading-none">
+          <p className="mt-[38px] text-[20px] font-bold uppercase leading-none">
             Follow us on socials @eatmoredip
           </p>
 

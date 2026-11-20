@@ -81,7 +81,7 @@ export default function RootLayout({
                 >
                   {Array.from({ length: 12 }).map((_, i) => (
                     <span key={i}>
-                      7G OF PROTEIN PER SERVING.
+                      21G OF PROTEIN PER SERVING.
                     </span>
                   ))}
                 </div>
