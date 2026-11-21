@@ -118,7 +118,7 @@ export default function Home() {
             Specific Content TBD
         </h1>
         <a
-            href="#products"
+            href="products"
             className="mt-8 inline-flex items-center justify-center bg-[#00a8df] px-8 py-4 text-[40px] font-bold uppercase text-[#ffda00] transition-all duration-200 hover:scale-105 hover:brightness-95"
           >
             YES PLEASE
