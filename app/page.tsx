@@ -1,5 +1,6 @@
 
 import Image from "next/image";
+import Link from "next/link";
 import ConveyorTrack from "./components/conveyor-track";
 import DipCloseupCarousel from "./components/dip-closeup-carousel";
 import { gallery } from "./data/gallery";
@@ -105,26 +106,26 @@ export default function Home() {
       {/* SECTION 1: HERO */}
 
       <section
-          id="home"
-          className="flex min-h-[540px] w-full items-center justify-center bg-[#d9d9d9] bg-cover bg-center md:min-h-[640px]"
-          style={{
-            backgroundImage: "url('/images/homehero.png')",
-          }}
-        >
-          <div className="flex flex-col items-center justify-center px-8 py-12 text-center sm:px-12 lg:px-16">
-          <h1 className="font-league text-center text-[128px] font-normal leading-[1.05] text-[#d62050] sm:text-[54px] lg:text-[90px]">
-          Text over Hero Image:
+        id="home"
+        className="flex min-h-[460px] w-full items-center justify-center bg-[#d9d9d9] bg-cover bg-center md:aspect-[1728/936] md:min-h-0"
+        style={{
+          backgroundImage: "url('/images/homehero.png')",
+        }}
+      >
+        <div className="flex flex-col items-center justify-center px-6 py-12 text-center">
+          <h1 className="font-league text-[clamp(52px,6.6vw,124px)] font-normal uppercase leading-[1.08] text-[#fff6e6] [text-shadow:0_2px_14px_rgba(0,0,0,0.3)]">
+            Some things are worth
             <br />
-            Specific Content TBD
-        </h1>
-        <a
-            href="products"
-            className="mt-8 inline-flex items-center justify-center bg-[#00a8df] px-8 py-4 text-[40px] font-bold uppercase text-[#ffda00] transition-all duration-200 hover:scale-105 hover:brightness-95"
-          >
-            YES PLEASE
-          </a>
-          </div>
+            double-dipping for.
+          </h1>
 
+          <Link
+            href="/products"
+            className="mt-[clamp(24px,3.2vw,60px)] inline-flex items-center justify-center bg-[#17a6de] px-[clamp(36px,4.8vw,88px)] py-[clamp(8px,1vw,18px)] text-[clamp(30px,3.6vw,66px)] font-bold uppercase leading-[1.2] text-[#ffda00] transition-all duration-200 hover:scale-105 hover:brightness-95 hover:shadow-[0_0_22px_6px_rgba(255,218,0,0.6)]"
+          >
+            Yes please
+          </Link>
+        </div>
       </section>
 
       {/* SECTION 2: PRODUCTS */}
@@ -146,38 +147,42 @@ export default function Home() {
         id="social"
         className="w-full bg-[#fff2db] px-5 py-12 sm:px-10 lg:py-16"
       >
-        <div className="mx-auto flex w-full max-w-[1050px] flex-col items-center">
+        <div className="mx-auto flex w-full max-w-[1100px] flex-col items-center">
 
-          <h2 className="bg-[#ffd208] px-5 py-2 text-center text-[28px] font-bold leading-tight text-[#d62050] sm:text-[38px]">
-            Title Text or One Liner Text
+          <h2 className="bg-[#ffd208] px-6 py-2 text-center text-[28px] font-bold uppercase leading-tight tracking-[0.5px] text-[#d62050] sm:px-8 sm:py-3 sm:text-[44px]">
+            Good times are better with MoreDip
           </h2>
+
+          <div className="mt-10 grid w-full grid-cols-2 gap-3 border-[12px] border-[#8b1538] bg-[#8b1538] sm:mt-16 sm:grid-cols-4 sm:gap-6 sm:border-[20px]">
+            {gallery.map((item) => (
+              <a
+                key={item.image}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${item.alt} (opens Instagram post)`}
+                className="group relative aspect-square overflow-hidden bg-[#dedede] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#ffd208]"
+              >
+                <Image
+                  src={item.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 640px) 260px, 50vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  style={{ objectPosition: item.focus }}
+                />
+              </a>
+            ))}
+          </div>
 
           <a
             href="https://www.instagram.com/eatmoredip/"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 text-[26px] font-bold text-[#a2003c] hover:underline"
+            className="mt-4 self-end text-[24px] font-bold text-[#8b1538] hover:underline sm:text-[32px]"
           >
             @eatmoredip
           </a>
-
-          <div className="mt-8 grid w-full grid-cols-2 gap-2 border-[8px] border-[#980039] bg-[#980039] sm:grid-cols-4 sm:gap-3 sm:border-[12px]">
-            {gallery.map((item) => (
-              <div
-                key={item.image}
-                className="relative aspect-square overflow-hidden bg-[#dedede]"
-              >
-                <Image
-                  src={item.image}
-                  alt={item.alt}
-                  fill
-                  sizes="(min-width: 640px) 300px, 50vw"
-                  className="object-cover"
-                  style={{ objectPosition: item.focus }}
-                />
-              </div>
-            ))}
-          </div>
         </div>
       </section>
     </div>

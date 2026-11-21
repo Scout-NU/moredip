@@ -5,24 +5,31 @@ import Image from "next/image";
 import { gallery } from "../data/gallery";
 
 const primaryLinks = [
+  "Home",
   "Products",
   "Waitlist",
   "About Us",
-  "Cart",
 ];
 
 const primaryHrefs = [
+  "/",
   "/products",
   "/waitlist",
   "/about",
-  "/#cart",
 ];
 
 const secondaryLinks = [
+  "Cart",
   "Wholesale",
-  "Find My",
-  "Link 7",
-  "Link 8",
+  "Instagram",
+  "TikTok",
+];
+
+const secondaryHrefs = [
+  "/#cart",
+  "/#wholesale",
+  "https://www.instagram.com/eatmoredip/",
+  "https://www.tiktok.com/@eatmoredip"
 ];
 
 export default function Footer() {
@@ -57,16 +64,23 @@ export default function Footer() {
             {/* Secondary links */}
             <nav aria-label="Secondary footer navigation">
               <ul className="space-y-2 lg:space-y-0">
-                {secondaryLinks.map((label) => (
-                  <li key={label}>
-                    <a
-                      href="#"
-                      className="text-[20px] font-normal leading-[1.45] hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 sm:text-[30px]"
-                    >
-                      {label}
-                    </a>
-                  </li>
-                ))}
+                {secondaryLinks.map((label, index) => {
+                  const href = secondaryHrefs[index];
+                  const isExternal = href.startsWith("http");
+
+                  return (
+                    <li key={label}>
+                      <a
+                        href={href}
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
+                        className="text-[20px] font-normal leading-[1.45] hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 sm:text-[30px]"
+                      >
+                        {label}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
           </div>
@@ -82,7 +96,7 @@ export default function Footer() {
           >
             <label
               htmlFor="footer-email"
-              className="mb-[18px] block text-[20px] font-normal uppercase leading-none"
+              className="mb-[18px] block text-[20px] font-bold uppercase leading-none"
             >
               Sign up for exclusive deals &amp; releases
             </label>
@@ -106,42 +120,31 @@ export default function Footer() {
           </form>
 
           {/* Social heading */}
-          <p className="mt-[38px] text-[20px] font-normal uppercase leading-none">
+          <p className="mt-[38px] text-[20px] font-bold uppercase leading-none">
             Follow us on socials @eatmoredip
           </p>
 
-          {/* Social links */}
-          <div
-            aria-label="Social media links"
-            className="mt-[27px] grid w-full max-w-[797px] grid-cols-2 gap-[11px] sm:grid-cols-4 sm:gap-[18px]"
-          >
-            {[
-              "Instagram",
-              "TikTok",
-              "Facebook",
-              "YouTube",
-            ].map((network, index) => {
-              /* First four photos from the homepage social grid */
-              const photo = gallery[index];
-
-              return (
-                <a
-                  key={network}
-                  href="#"
-                  aria-label={network}
-                  className="relative aspect-[179/177.259] min-w-0 overflow-hidden border-2 border-white bg-[#FFF2DF] focus-visible:outline-2 focus-visible:outline-offset-2"
-                >
-                  <Image
-                    src={photo.image}
-                    alt=""
-                    fill
-                    sizes="(min-width: 640px) 200px, 50vw"
-                    className="object-cover"
-                    style={{ objectPosition: photo.focus }}
-                  />
-                </a>
-              );
-            })}
+          {/* Instagram photo grid */}
+          <div className="mt-[27px] grid w-full max-w-[797px] grid-cols-2 gap-[11px] sm:grid-cols-4 sm:gap-[18px]">
+            {gallery.slice(0, 4).map((photo, index) => (
+              <a
+                key={photo.image}
+                href="https://www.instagram.com/eatmoredip/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View photo ${index + 1} on Instagram`}
+                className="relative aspect-[179/177.259] min-w-0 overflow-hidden border-2 border-white bg-[#FFF2DF] focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                <Image
+                  src={photo.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 640px) 200px, 50vw"
+                  className="object-cover"
+                  style={{ objectPosition: photo.focus }}
+                />
+              </a>
+            ))}
           </div>
         </div>
       </div>

@@ -61,7 +61,11 @@ const RESERVED_SCREEN_HEIGHT = "300px";
 const AUTOPLAY_INTERVAL_MS = 5000;
 
 /* Angles in degrees: 0 is right, 90 is down, 180 is left */
-const calloutAngles = [215, 180, 145, -25, 25];
+/*
+  Listed in reading order (upper left, upper right, lower left,
+  lower right) so phones show the callouts in the same order.
+*/
+const calloutAngles = [210, -30, 150, 30];
 
 const callouts = calloutAngles.map((angle) => {
   const radians = (angle * Math.PI) / 180;
@@ -93,7 +97,7 @@ const percentY = (y: number) => `${(y / CANVAS_HEIGHT) * 100}%`;
    CALLOUT ARROWS
 ======================================== */
 
-function CalloutArrows() {
+function CalloutArrows({ color }: { color: string }) {
   return (
     <svg
       className="pointer-events-none absolute inset-0 z-20 h-full w-full"
@@ -103,18 +107,21 @@ function CalloutArrows() {
       <defs>
         <marker
           id="ingredient-arrowhead"
-          markerWidth="9"
-          markerHeight="9"
-          refX="7"
-          refY="4.5"
+          markerWidth="15"
+          markerHeight="15"
+          refX="11"
+          refY="7.5"
           orient="auto"
           markerUnits="userSpaceOnUse"
         >
           <path
-            d="M 0 0 L 8 4.5 L 0 9"
+            d="M 2 2 L 12 7.5 L 2 13"
             fill="none"
-            stroke="#111111"
-            strokeWidth="1.5"
+            stroke={color}
+            strokeWidth="2.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="transition-[stroke] duration-500"
           />
         </marker>
       </defs>
@@ -126,8 +133,9 @@ function CalloutArrows() {
           y1={callout.tail.y}
           x2={callout.tip.x}
           y2={callout.tip.y}
-          stroke="#111111"
-          strokeWidth="1.8"
+          stroke={color}
+          strokeWidth="3"
+          className="transition-[stroke] duration-500"
           strokeLinecap="round"
           markerEnd="url(#ingredient-arrowhead)"
         />
@@ -308,13 +316,12 @@ function CarouselControls({
    DIP CLOSEUP CAROUSEL
 ======================================== */
 
-/* Order: upper left, middle left, lower left, upper right, lower right */
+/* Order matches calloutAngles: upper left, upper right, lower left, lower right */
 const descriptions = [
-  "Packed with protein",
-  "Perfect for parties",
-  "A go-to snack",
-  "Boston based",
-  "Women owned",
+  "21g of protein",
+  "Women-owned",
+  "Made with Greek yogurt",
+  "Only 90 calories per serving",
 ];
 
 export default function DipCloseupCarousel({
@@ -421,7 +428,7 @@ export default function DipCloseupCarousel({
             />
           ))}
 
-          <CalloutArrows />
+          <CalloutArrows color={dip.textColor} />
         </div>
 
         <div className="mt-4">{controls}</div>
