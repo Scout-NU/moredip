@@ -55,11 +55,11 @@ export default function Home() {
   </h2>
 
   <div className="mx-auto mt-12 grid max-w-[1200px] grid-cols-2 gap-x-8 gap-y-12 lg:mt-16 lg:grid-cols-4">
-    {[1, 2, 3, 4].map((n) => (
-      <div key={n} className="flex flex-col items-center text-center">
+    {["Woman Owned", "reason why", "reason why", "reason why"].map((reason, index) => (
+      <div key={index} className="flex flex-col items-center text-center">
         <div className="aspect-square w-[min(35vw,200px)] rounded-full bg-[#d9d9d9] bg-cover bg-center" />
         <p className="mt-6 text-[24px] font-bold leading-[normal] text-[#FFD208] lg:text-[32px]">
-          reason why
+          {reason}
         </p>
       </div>
     ))}

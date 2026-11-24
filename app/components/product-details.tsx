@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import type { ReactNode } from "react";
 import Image from "next/image";
 
 type Product = {
@@ -12,9 +13,8 @@ type Product = {
   rating?: number;
   reviewCount?: number;
   protein?: string;
-  macros?: string;
-  ingredients?: string;
-  nutritionFacts?: string;
+  ingredients?: ReactNode;
+  nutritionFacts?: ReactNode;
 };
 
 export default function ProductDetail({
@@ -98,30 +98,29 @@ export default function ProductDetail({
           >
             ADD TO CART
           </button>
-        </div>
-      </section>
+          <section className="product-accordions">
+            {sections.map((section) => (
+              <div className="accordion" key={section.title}>
+                <button
+                  className="accordion-trigger"
+                  onClick={() => toggleSection(section.title)}
+                  aria-expanded={openSections.includes(section.title)}
+                >
+                  <span>{section.title}</span>
+                  <span className="accordion-icon">
+                    {openSections.includes(section.title) ? "−" : "+"}
+                  </span>
+                </button>
 
-      <section className="product-accordions">
-        {sections.map((section) => (
-          <div className="accordion" key={section.title}>
-            <button
-              className="accordion-trigger"
-              onClick={() => toggleSection(section.title)}
-              aria-expanded={openSections.includes(section.title)}
-            >
-              <span>{section.title}</span>
-              <span className="accordion-icon">
-                {openSections.includes(section.title) ? "−" : "+"}
-              </span>
-            </button>
-
-            {openSections.includes(section.title) && (
-              <div className="accordion-content">
-                {section.content || "Product information coming soon."}
+                {openSections.includes(section.title) && (
+                  <div className="accordion-content">
+                    {section.content || "Product information coming soon."}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        ))}
+            ))}
+          </section>
+        </div>
       </section>
     </main>
   );
