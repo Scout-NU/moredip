@@ -27,7 +27,7 @@ const secondaryLinks = [
 
 const secondaryHrefs = [
   "/#cart",
-  "/#wholesale",
+  "/wholesale",
   "https://www.instagram.com/eatmoredip/",
   "https://www.tiktok.com/@eatmoredip"
 ];
