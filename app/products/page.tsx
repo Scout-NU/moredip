@@ -17,13 +17,6 @@ export default function Home() {
           sizes="100vw"
           className="hero-image"
         />
-        <div className="hero-overlay">
-          <h1>
-            Shop Here Hook
-            <br />
-            (Text over image)
-          </h1>
-        </div>
       </section>
 
       {/* Products */}
